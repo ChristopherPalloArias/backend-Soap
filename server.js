@@ -19,6 +19,10 @@ const db = mysql.createPool({
     database: 'christopherobin_practiceclientserver'
 });
 
+app.get('/', (req, res) => {
+    res.send('El servidor SOAP está corriendo');
+});
+
 app.post('/soap', (req, res) => {
     const xml = req.body.toString();
     const usernameRegex = /<log:username>(.*?)<\/log:username>/;
