@@ -52,11 +52,8 @@
 
   <!-- Define el servicio MyService que implementa el binding MyBinding -->
   <service name="MyService">
-    <!-- Documentación descriptiva del servicio -->
     <documentation>My SOAP Service</documentation>
-    <!-- Define un puerto llamado MyPort que utiliza el binding MyBinding -->
     <port name="MyPort" binding="tns:MyBinding">
-      <!-- Especifica la dirección del servicio SOAP -->
       <soap:address location="http://localhost:3000/soap"/>
     </port>
   </service>
