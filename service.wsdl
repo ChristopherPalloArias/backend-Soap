@@ -6,38 +6,57 @@
     xmlns:tns="http://www.examples.com/wsdl/MyService.wsdl"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
+  <!-- Define un mensaje de solicitud llamado loginRequest que incluye las partes username y password -->
   <message name="loginRequest">
+    <!-- Parte del mensaje loginRequest que contiene el nombre de usuario, del tipo string definido en XML Schema -->
     <part name="username" type="xsd:string"/>
+    <!-- Parte del mensaje loginRequest que contiene la contraseña, del tipo string definido en XML Schema -->
     <part name="password" type="xsd:string"/>
   </message>
 
+  <!-- Define un mensaje de respuesta llamado loginResponse que incluye la parte message -->
   <message name="loginResponse">
+    <!-- Parte del mensaje loginResponse que contiene el mensaje de respuesta, del tipo string definido en XML Schema -->
     <part name="message" type="xsd:string"/>
   </message>
 
+  <!-- Define la interfaz del servicio web llamada MyPortType con una operación llamada login -->
   <portType name="MyPortType">
+    <!-- Define una operación llamada login -->
     <operation name="login">
+      <!-- Define el mensaje de entrada para la operación login, que es loginRequest -->
       <input message="tns:loginRequest"/>
+      <!-- Define el mensaje de salida para la operación login, que es loginResponse -->
       <output message="tns:loginResponse"/>
     </operation>
   </portType>
 
+  <!-- Define cómo las operaciones se enlazan al protocolo SOAP usando el estilo RPC y el transporte HTTP -->
   <binding name="MyBinding" type="tns:MyPortType">
+    <!-- Especifica que el binding utiliza el protocolo SOAP con el estilo RPC y el transporte HTTP -->
     <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <!-- Define la operación login dentro del binding -->
     <operation name="login">
+      <!-- Especifica la acción SOAP para la operación login -->
       <soap:operation soapAction="urn:login"/>
+      <!-- Define el cuerpo del mensaje de entrada como literal -->
       <input>
         <soap:body use="literal"/>
       </input>
+      <!-- Define el cuerpo del mensaje de salida como literal -->
       <output>
         <soap:body use="literal"/>
       </output>
     </operation>
   </binding>
 
+  <!-- Define el servicio MyService que implementa el binding MyBinding -->
   <service name="MyService">
+    <!-- Documentación descriptiva del servicio -->
     <documentation>My SOAP Service</documentation>
+    <!-- Define un puerto llamado MyPort que utiliza el binding MyBinding -->
     <port name="MyPort" binding="tns:MyBinding">
+      <!-- Especifica la dirección del servicio SOAP -->
       <soap:address location="http://localhost:3000/soap"/>
     </port>
   </service>
